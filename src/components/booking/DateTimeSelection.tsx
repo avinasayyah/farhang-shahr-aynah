@@ -4,10 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Calendar } from '@/components/ui/calendar';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { format } from 'date-fns';
-import { faIR } from 'date-fns/locale';
+import DatePicker from 'react-persian-calendar-date-picker';
 import { CalendarIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -19,10 +16,10 @@ interface DateTimeSelectionProps {
 }
 
 const DateTimeSelection = ({ selectedDate, selectedTime, onSelect, onBack }: DateTimeSelectionProps) => {
-  const [date, setDate] = useState<Date | undefined>(
-    selectedDate ? new Date(selectedDate) : undefined
+  const [date, setDate] = useState<any>(
+    selectedDate ? new Date(selectedDate) : null
   );
-  const [time, setTime] = useState(selectedTime || '');
+  const [time, setTime] = useState(selectedTime || '14:00'); // Default Tehran time
   const [errors, setErrors] = useState({ date: '', time: '' });
 
   const handleSubmit = () => {
@@ -39,7 +36,9 @@ const DateTimeSelection = ({ selectedDate, selectedTime, onSelect, onBack }: Dat
     setErrors(newErrors);
     
     if (!newErrors.date && !newErrors.time && date) {
-      onSelect(date.toISOString(), time);
+      // Convert Persian date to Gregorian
+      const gregorianDate = new Date(date.year, date.month - 1, date.day);
+      onSelect(gregorianDate.toISOString(), time);
     }
   };
 
@@ -71,34 +70,21 @@ const DateTimeSelection = ({ selectedDate, selectedTime, onSelect, onBack }: Dat
         <CardContent className="space-y-6">
           <div className="space-y-2">
             <Label className="text-fantasy-black font-bold">تاریخ ملاقات</Label>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  className={cn(
-                    "w-full justify-start text-right font-normal border-2 border-fantasy-pink",
-                    !date && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="ml-2 h-4 w-4" />
-                  {date ? (
-                    format(date, "PPP", { locale: faIR })
-                  ) : (
-                    <span>انتخاب تاریخ</span>
-                  )}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar
-                  mode="single"
-                  selected={date}
-                  onSelect={setDate}
-                  disabled={(date) => date < tomorrow}
-                  initialFocus
-                  className="pointer-events-auto bg-white"
-                />
-              </PopoverContent>
-            </Popover>
+            <div className="border-2 border-fantasy-pink rounded-md p-2 bg-white">
+              <DatePicker
+                value={date}
+                onChange={setDate}
+                inputPlaceholder="انتخاب تاریخ"
+                formatInputText={() => date ? `${date.year}/${date.month}/${date.day}` : 'انتخاب تاریخ'}
+                shouldHighlightWeekends
+                locale="fa"
+                calendarClassName="bg-white shadow-lg"
+                inputClassName="w-full text-center text-fantasy-black border-none outline-none"
+                wrapperClassName="w-full"
+                colorPrimary="#ec4899"
+                colorPrimaryLight="rgba(236, 72, 153, 0.1)"
+              />
+            </div>
             {errors.date && (
               <p className="text-destructive text-sm">{errors.date}</p>
             )}
@@ -125,7 +111,7 @@ const DateTimeSelection = ({ selectedDate, selectedTime, onSelect, onBack }: Dat
               className="bg-fantasy-gold/20 p-4 rounded-lg border-2 border-fantasy-gold"
             >
               <p className="text-fantasy-black font-bold text-center">
-                ✨ قرار ملاقات شما: {format(date, "PPP", { locale: faIR })} ساعت {time} ✨
+                ✨ قرار ملاقات شما: {date.year}/{date.month}/{date.day} ساعت {time} ✨
               </p>
             </motion.div>
           )}
@@ -136,7 +122,7 @@ const DateTimeSelection = ({ selectedDate, selectedTime, onSelect, onBack }: Dat
         <Button
           onClick={onBack}
           variant="outline"
-          className="border-2 border-white bg-white/20 text-white hover:bg-white hover:text-fantasy-black"
+          className="border-2 border-white bg-white/40 text-white hover:bg-white hover:text-fantasy-black font-bold"
         >
           بازگشت
         </Button>

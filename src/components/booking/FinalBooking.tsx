@@ -159,12 +159,41 @@ const FinalBooking = ({ bookingData, onBack }: FinalBookingProps) => {
               <p className="text-fantasy-black/70">شهر:</p>
               <p className="font-bold text-fantasy-black">{bookingData.userInfo.city}</p>
             </div>
-            
-            <div className="space-y-2">
-              <p className="text-fantasy-black/70">هزینه کل:</p>
-              <Badge className="bg-fantasy-pink text-white font-bold text-lg">
-                {totalPrice.toLocaleString('fa-IR')} تومان
-              </Badge>
+          </div>
+
+          {/* Additional costs breakdown */}
+          <div className="mt-6 p-4 bg-fantasy-gold/10 rounded-lg border border-fantasy-gold">
+            <h4 className="font-bold text-fantasy-black mb-3">💰 جزئیات هزینه:</h4>
+            <div className="space-y-2 text-sm">
+              <div className="flex justify-between">
+                <span>هزینه پایه ({getDurationLabel()}):</span>
+                <span className="font-bold">
+                  {(bookingData.duration === 1 ? 5000000 : 
+                    bookingData.duration === 2 ? 8000000 : 15000000).toLocaleString('fa-IR')} تومان
+                </span>
+              </div>
+              
+              {bookingData.experienceType === 'two-way' && (
+                <div className="flex justify-between text-fantasy-pink">
+                  <span>هزینه اضافه تجربه دوطرفه:</span>
+                  <span className="font-bold">+2,000,000 تومان</span>
+                </div>
+              )}
+              
+              {bookingData.userInfo.city !== 'مشهد' && (
+                <div className="flex justify-between text-fantasy-pink">
+                  <span>هزینه اضافه شهرهای غیر مشهد:</span>
+                  <span className="font-bold">+8,000,000 تومان</span>
+                </div>
+              )}
+              
+              <hr className="border-fantasy-gold" />
+              <div className="flex justify-between text-lg font-bold">
+                <span>مجموع کل:</span>
+                <Badge className="bg-fantasy-pink text-white font-bold text-lg">
+                  {totalPrice.toLocaleString('fa-IR')} تومان
+                </Badge>
+              </div>
             </div>
           </div>
         </CardContent>
@@ -192,7 +221,7 @@ const FinalBooking = ({ bookingData, onBack }: FinalBookingProps) => {
         <Button
           onClick={onBack}
           variant="outline"
-          className="border-2 border-white text-white hover:bg-white hover:text-fantasy-black"
+          className="border-2 border-white bg-white/40 text-white hover:bg-white hover:text-fantasy-black font-bold"
         >
           بازگشت برای ویرایش
         </Button>

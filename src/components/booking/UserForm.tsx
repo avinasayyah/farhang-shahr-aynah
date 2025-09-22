@@ -173,7 +173,7 @@ const UserForm = ({ userInfo, onSubmit, onBack }: UserFormProps) => {
                 type="button"
                 onClick={onBack}
                 variant="outline"
-                className="border-2 border-fantasy-pink bg-fantasy-pink/20 text-fantasy-pink hover:bg-fantasy-pink hover:text-white"
+                className="border-2 border-white bg-white/40 text-white hover:bg-white hover:text-fantasy-black font-bold"
               >
                 بازگشت
               </Button>

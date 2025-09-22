@@ -70,7 +70,7 @@ const ExperienceSelection = ({ selected, onSelect, onBack }: ExperienceSelection
         <Button
           onClick={onBack}
           variant="outline"
-          className="border-2 border-white bg-white/20 text-white hover:bg-white hover:text-fantasy-black"
+          className="border-2 border-white bg-white/40 text-white hover:bg-white hover:text-fantasy-black font-bold"
         >
           بازگشت
         </Button>
