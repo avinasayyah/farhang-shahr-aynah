@@ -13,6 +13,10 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        'lalezar': ['Lalezar', 'cursive'],
+        'vazir': ['Vazirmatn', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -57,6 +61,25 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        fantasy: {
+          pink: "hsl(var(--pink-fantasy))",
+          "pink-light": "hsl(var(--pink-light))",
+          "pink-dark": "hsl(var(--pink-dark))",
+          gold: "hsl(var(--gold-fantasy))",
+          "gold-light": "hsl(var(--gold-light))",
+          "gold-dark": "hsl(var(--gold-dark))",
+          black: "hsl(var(--black-fantasy))",
+          "black-light": "hsl(var(--black-light))",
+        },
+      },
+      backgroundImage: {
+        'fantasy-gradient': 'var(--gradient-fantasy)',
+        'card-gradient': 'var(--gradient-card)',
+        'button-gradient': 'var(--gradient-button)',
+      },
+      boxShadow: {
+        'fantasy': 'var(--shadow-fantasy)',
+        'glow': 'var(--shadow-glow)',
       },
       borderRadius: {
         lg: "var(--radius)",
