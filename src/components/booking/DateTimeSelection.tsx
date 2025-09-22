@@ -136,7 +136,7 @@ const DateTimeSelection = ({ selectedDate, selectedTime, onSelect, onBack }: Dat
         <Button
           onClick={onBack}
           variant="outline"
-          className="border-2 border-white text-white hover:bg-white hover:text-fantasy-black"
+          className="border-2 border-white bg-white/20 text-white hover:bg-white hover:text-fantasy-black"
         >
           بازگشت
         </Button>

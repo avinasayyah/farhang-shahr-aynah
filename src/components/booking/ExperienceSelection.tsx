@@ -15,12 +15,12 @@ const experiences: ExperienceType[] = [
   {
     id: 'one-way',
     title: '✨ تجربه یک‌طرفه فانتزی',
-    description: 'تجربه‌ای رویایی و خاص فقط برای شما! لحظات فراموش‌نشدنی با خدمات حرفه‌ای و فضایی دلنشین.',
+    description: 'تجربه‌ای رویایی و خاص',
   },
   {
     id: 'two-way',
     title: '💖 تجربه دوطرفه فانتزی',
-    description: 'تجربه‌ای کامل و تعاملی! ارتباطی عمیق‌تر و لحظاتی پر از هیجان و احساس متقابل.',
+    description: 'تجربه‌ای کامل و تعاملی',
     price: 2000000
   }
 ];
@@ -53,13 +53,8 @@ const ExperienceSelection = ({ selected, onSelect, onBack }: ExperienceSelection
             onClick={() => onSelect(exp.id)}
           >
             <CardHeader>
-              <CardTitle className="text-2xl font-lalezar text-fantasy-black flex items-center justify-between">
+              <CardTitle className="text-2xl font-lalezar text-fantasy-black">
                 {exp.title}
-                {exp.price && (
-                  <Badge className="bg-fantasy-gold text-fantasy-black font-bold">
-                    +{exp.price.toLocaleString('fa-IR')} تومان
-                  </Badge>
-                )}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -75,7 +70,7 @@ const ExperienceSelection = ({ selected, onSelect, onBack }: ExperienceSelection
         <Button
           onClick={onBack}
           variant="outline"
-          className="border-2 border-white text-white hover:bg-white hover:text-fantasy-black"
+          className="border-2 border-white bg-white/20 text-white hover:bg-white hover:text-fantasy-black"
         >
           بازگشت
         </Button>

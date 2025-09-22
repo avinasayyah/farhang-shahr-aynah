@@ -139,8 +139,23 @@ const UserForm = ({ userInfo, onSubmit, onBack }: UserFormProps) => {
                       <SelectValue placeholder="شهر خود را انتخاب کنید" />
                     </SelectTrigger>
                     <SelectContent className="max-h-60">
+                      <div className="p-2">
+                        <Input
+                          placeholder="جستجوی شهر..."
+                          className="mb-2 text-right"
+                          onChange={(e) => {
+                            const searchValue = e.target.value.toLowerCase();
+                            const items = document.querySelectorAll('[data-radix-select-item]');
+                            items.forEach((item) => {
+                              const text = item.textContent?.toLowerCase() || '';
+                              const shouldShow = text.includes(searchValue);
+                              (item as HTMLElement).style.display = shouldShow ? 'flex' : 'none';
+                            });
+                          }}
+                        />
+                      </div>
                       {persianCities.map((city) => (
-                        <SelectItem key={city} value={city} className="text-right">
+                        <SelectItem key={city} value={city} className="text-right" data-radix-select-item>
                           {city}
                         </SelectItem>
                       ))}
@@ -158,7 +173,7 @@ const UserForm = ({ userInfo, onSubmit, onBack }: UserFormProps) => {
                 type="button"
                 onClick={onBack}
                 variant="outline"
-                className="border-2 border-fantasy-pink text-fantasy-pink hover:bg-fantasy-pink hover:text-white"
+                className="border-2 border-fantasy-pink bg-fantasy-pink/20 text-fantasy-pink hover:bg-fantasy-pink hover:text-white"
               >
                 بازگشت
               </Button>

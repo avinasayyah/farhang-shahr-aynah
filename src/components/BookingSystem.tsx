@@ -90,7 +90,7 @@ const BookingSystem = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-6xl font-lalezar text-white drop-shadow-lg mb-4">
-            ✨ فرهنگ شهر آینه ✨
+            ✨ شیمیل آوینا ✨
           </h1>
           <p className="text-xl text-white/90 font-medium">
             تجربه‌ای فانتزی و لاکچری منتظر شماست
