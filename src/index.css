@@ -4,7 +4,7 @@
 
 /* Persian Fantasy Design System - Pink, Black, Gold Theme */
 
-@import url('https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lalezar&family=Vazirmatn:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
 @layer base {
   :root {

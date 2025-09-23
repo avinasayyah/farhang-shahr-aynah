@@ -16,6 +16,7 @@ export default {
       fontFamily: {
         'lalezar': ['Lalezar', 'cursive'],
         'vazir': ['Vazirmatn', 'sans-serif'],
+        'inter': ['Inter', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -61,16 +62,15 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        fantasy: {
-          pink: "hsl(var(--pink-fantasy))",
-          "pink-light": "hsl(var(--pink-light))",
-          "pink-dark": "hsl(var(--pink-dark))",
-          gold: "hsl(var(--gold-fantasy))",
-          "gold-light": "hsl(var(--gold-light))",
-          "gold-dark": "hsl(var(--gold-dark))",
-          black: "hsl(var(--black-fantasy))",
-          "black-light": "hsl(var(--black-light))",
-        },
+        /* Fantasy Colors */
+        'fantasy-pink': 'hsl(var(--pink-fantasy))',
+        'fantasy-pink-light': 'hsl(var(--pink-light))',
+        'fantasy-pink-dark': 'hsl(var(--pink-dark))',
+        'fantasy-gold': 'hsl(var(--gold-fantasy))',
+        'fantasy-gold-light': 'hsl(var(--gold-light))',
+        'fantasy-gold-dark': 'hsl(var(--gold-dark))',
+        'fantasy-black': 'hsl(var(--black-fantasy))',
+        'fantasy-black-light': 'hsl(var(--black-light))',
       },
       backgroundImage: {
         'fantasy-gradient': 'var(--gradient-fantasy)',

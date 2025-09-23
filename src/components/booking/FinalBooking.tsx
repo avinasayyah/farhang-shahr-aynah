@@ -77,7 +77,7 @@ const FinalBooking = ({ bookingData, onBack }: FinalBookingProps) => {
           <h3 className="text-2xl font-lalezar text-fantasy-black mb-2">
             💰 مبلغ بیعانه
           </h3>
-          <div className="text-4xl font-bold text-fantasy-black">
+          <div className="text-4xl font-bold text-fantasy-black font-inter">
             {deposit.toLocaleString('en-US')} تومان
           </div>
         </CardContent>
@@ -98,7 +98,7 @@ const FinalBooking = ({ bookingData, onBack }: FinalBookingProps) => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-fantasy-black/70">شماره کارت:</p>
-                <p className="text-2xl font-bold text-fantasy-black font-mono tracking-wider">
+                <p className="text-2xl font-bold text-fantasy-black font-inter tracking-wider">
                   {cardNumber}
                 </p>
                 <p className="text-sm text-fantasy-black/70 mt-1">
@@ -142,7 +142,7 @@ const FinalBooking = ({ bookingData, onBack }: FinalBookingProps) => {
             
             <div className="space-y-2">
               <p className="text-fantasy-black/70">ساعت:</p>
-              <p className="font-bold text-fantasy-black">{bookingData.time}</p>
+              <p className="font-bold text-fantasy-black font-inter text-lg">{bookingData.time}</p>
             </div>
             
             <div className="space-y-2">
@@ -152,7 +152,7 @@ const FinalBooking = ({ bookingData, onBack }: FinalBookingProps) => {
             
             <div className="space-y-2">
               <p className="text-fantasy-black/70">شماره تماس:</p>
-              <p className="font-bold text-fantasy-black">{bookingData.userInfo.phone}</p>
+              <p className="font-bold text-fantasy-black font-inter text-lg">{bookingData.userInfo.phone}</p>
             </div>
             
             <div className="space-y-2">
@@ -167,7 +167,7 @@ const FinalBooking = ({ bookingData, onBack }: FinalBookingProps) => {
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
                 <span>هزینه پایه ({getDurationLabel()}):</span>
-                <span className="font-bold">
+                <span className="font-bold font-inter text-lg">
                   {(bookingData.duration === 1 ? 5000000 : 
                     bookingData.duration === 2 ? 8000000 : 15000000).toLocaleString('en-US')} تومان
                 </span>
@@ -176,21 +176,21 @@ const FinalBooking = ({ bookingData, onBack }: FinalBookingProps) => {
               {bookingData.experienceType === 'two-way' && (
                 <div className="flex justify-between text-fantasy-pink">
                   <span>هزینه اضافه تجربه دوطرفه:</span>
-                  <span className="font-bold">+2,000,000 تومان</span>
+                  <span className="font-bold font-inter text-lg">+2,000,000 تومان</span>
                 </div>
               )}
               
               {bookingData.userInfo.city !== 'مشهد' && (
                 <div className="flex justify-between text-fantasy-pink">
                   <span>هزینه اضافه شهرهای غیر مشهد:</span>
-                  <span className="font-bold">+8,000,000 تومان</span>
+                  <span className="font-bold font-inter text-lg">+8,000,000 تومان</span>
                 </div>
               )}
               
               <hr className="border-fantasy-gold" />
               <div className="flex justify-between text-lg font-bold">
                 <span>مجموع کل:</span>
-                <Badge className="bg-fantasy-pink text-white font-bold text-lg">
+                <Badge className="bg-fantasy-pink text-white font-bold text-xl font-inter">
                   {totalPrice.toLocaleString('en-US')} تومان
                 </Badge>
               </div>

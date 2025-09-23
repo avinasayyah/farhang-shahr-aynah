@@ -4,9 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import DatePicker from 'react-persian-calendar-date-picker';
-import { CalendarIcon } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { PersianDatePicker } from '@/components/ui/persian-calendar';
 
 interface DateTimeSelectionProps {
   selectedDate: string | null;
@@ -16,8 +14,8 @@ interface DateTimeSelectionProps {
 }
 
 const DateTimeSelection = ({ selectedDate, selectedTime, onSelect, onBack }: DateTimeSelectionProps) => {
-  const [date, setDate] = useState<any>(
-    selectedDate ? new Date(selectedDate) : null
+  const [date, setDate] = useState<Date | undefined>(
+    selectedDate ? new Date(selectedDate) : undefined
   );
   const [time, setTime] = useState(selectedTime || '14:00'); // Default Tehran time
   const [errors, setErrors] = useState({ date: '', time: '' });
@@ -36,9 +34,7 @@ const DateTimeSelection = ({ selectedDate, selectedTime, onSelect, onBack }: Dat
     setErrors(newErrors);
     
     if (!newErrors.date && !newErrors.time && date) {
-      // Convert Persian date to Gregorian
-      const gregorianDate = new Date(date.year, date.month - 1, date.day);
-      onSelect(gregorianDate.toISOString(), time);
+      onSelect(date.toISOString(), time);
     }
   };
 
@@ -70,37 +66,12 @@ const DateTimeSelection = ({ selectedDate, selectedTime, onSelect, onBack }: Dat
         <CardContent className="space-y-6">
           <div className="space-y-2">
             <Label className="text-fantasy-black font-bold">تاریخ ملاقات</Label>
-            <div className="border-2 border-fantasy-pink rounded-lg p-4 bg-gradient-to-br from-white to-fantasy-gold/10 shadow-inner">
-              <DatePicker
-                value={date}
-                onChange={setDate}
-                inputPlaceholder="انتخاب تاریخ"
-                formatInputText={() => date ? `${date.year}/${date.month}/${date.day}` : 'انتخاب تاریخ'}
-                shouldHighlightWeekends
-                locale="fa"
-                calendarClassName="bg-white shadow-2xl border-2 border-fantasy-gold rounded-xl overflow-hidden !font-vazir"
-                inputClassName="w-full text-center text-fantasy-black border-none outline-none bg-transparent text-lg font-semibold pointer-events-none"
-                wrapperClassName="w-full"
-                colorPrimary="#ec4899"
-                colorPrimaryLight="rgba(236, 72, 153, 0.15)"
-                renderInput={({ ref, ...rest }) => (
-                  <div className="flex items-center justify-center gap-2 p-4 rounded-lg bg-gradient-to-r from-fantasy-pink/10 to-fantasy-gold/10 border-2 border-fantasy-pink/30 hover:border-fantasy-gold transition-all duration-300 cursor-pointer">
-                    <CalendarIcon className="h-6 w-6 text-fantasy-pink" />
-                    <input 
-                      {...rest} 
-                      ref={ref} 
-                      className="text-center font-bold text-fantasy-black bg-transparent border-none outline-none flex-1 cursor-pointer font-vazir text-lg" 
-                      readOnly
-                    />
-                  </div>
-                )}
-                minimumDate={{
-                  year: new Date().getFullYear(),
-                  month: new Date().getMonth() + 1,
-                  day: new Date().getDate() + 1
-                }}
-              />
-            </div>
+            <PersianDatePicker
+              value={date}
+              onChange={setDate}
+              placeholder="انتخاب تاریخ"
+              minDate={tomorrow}
+            />
             {errors.date && (
               <p className="text-destructive text-sm">{errors.date}</p>
             )}
@@ -110,10 +81,10 @@ const DateTimeSelection = ({ selectedDate, selectedTime, onSelect, onBack }: Dat
             <Label className="text-fantasy-black font-bold">ساعت ملاقات</Label>
             <Input
               type="time"
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
-              className="border-2 border-fantasy-pink focus:border-fantasy-gold text-center text-lg"
-              dir="ltr"
+                    value={time}
+                    onChange={(e) => setTime(e.target.value)}
+                    className="border-2 border-fantasy-pink focus:border-fantasy-gold text-center text-xl font-inter"
+                    dir="ltr"
             />
             {errors.time && (
               <p className="text-destructive text-sm">{errors.time}</p>
@@ -126,8 +97,17 @@ const DateTimeSelection = ({ selectedDate, selectedTime, onSelect, onBack }: Dat
               animate={{ opacity: 1, y: 0 }}
               className="bg-fantasy-gold/20 p-4 rounded-lg border-2 border-fantasy-gold"
             >
-              <p className="text-fantasy-black font-bold text-center">
-                ✨ قرار ملاقات شما: {date.year}/{date.month}/{date.day} ساعت {time} ✨
+              <p className="text-fantasy-black font-bold text-center font-inter text-lg">
+                ✨ قرار ملاقات شما: {(() => {
+                  const persian = {
+                    year: date.getFullYear(),
+                    month: date.getMonth() + 1,
+                    day: date.getDate()
+                  };
+                  // Simple Gregorian to Persian approximation for display
+                  const persianYear = persian.year - 621;
+                  return `${persianYear}/${persian.month}/${persian.day}`;
+                })()} ساعت {time} ✨
               </p>
             </motion.div>
           )}

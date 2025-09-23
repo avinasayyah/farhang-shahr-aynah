@@ -121,10 +121,10 @@ const UserForm = ({ userInfo, onSubmit, onBack }: UserFormProps) => {
                 render={({ field: { value, ...field } }) => (
                   <Input
                     {...field}
-                    value={digitsEnToFa(value)}
+                    value={value}
                     onChange={(e) => handlePhoneChange(e.target.value)}
-                    placeholder="۰۹۱۲۳۴۵۶۷۸۹"
-                    className="border-2 border-fantasy-pink focus:border-fantasy-gold text-center text-lg"
+                    placeholder="09123456789"
+                    className="border-2 border-fantasy-pink focus:border-fantasy-gold text-center text-xl font-inter"
                     dir="ltr"
                   />
                 )}
