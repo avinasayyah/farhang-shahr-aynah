@@ -53,7 +53,7 @@ const DurationSelection = ({ selected, onSelect, onBack }: DurationSelectionProp
                   {duration.label}
                 </span>
                 <Badge className="bg-fantasy-pink text-white font-bold text-lg">
-                  {duration.price.toLocaleString('fa-IR')} تومان
+                  {duration.price.toLocaleString('en-US')} تومان
                 </Badge>
               </CardTitle>
             </CardHeader>

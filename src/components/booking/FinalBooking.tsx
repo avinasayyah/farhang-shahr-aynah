@@ -78,7 +78,7 @@ const FinalBooking = ({ bookingData, onBack }: FinalBookingProps) => {
             💰 مبلغ بیعانه
           </h3>
           <div className="text-4xl font-bold text-fantasy-black">
-            {deposit.toLocaleString('fa-IR')} تومان
+            {deposit.toLocaleString('en-US')} تومان
           </div>
         </CardContent>
       </Card>
@@ -169,7 +169,7 @@ const FinalBooking = ({ bookingData, onBack }: FinalBookingProps) => {
                 <span>هزینه پایه ({getDurationLabel()}):</span>
                 <span className="font-bold">
                   {(bookingData.duration === 1 ? 5000000 : 
-                    bookingData.duration === 2 ? 8000000 : 15000000).toLocaleString('fa-IR')} تومان
+                    bookingData.duration === 2 ? 8000000 : 15000000).toLocaleString('en-US')} تومان
                 </span>
               </div>
               
@@ -191,7 +191,7 @@ const FinalBooking = ({ bookingData, onBack }: FinalBookingProps) => {
               <div className="flex justify-between text-lg font-bold">
                 <span>مجموع کل:</span>
                 <Badge className="bg-fantasy-pink text-white font-bold text-lg">
-                  {totalPrice.toLocaleString('fa-IR')} تومان
+                  {totalPrice.toLocaleString('en-US')} تومان
                 </Badge>
               </div>
             </div>

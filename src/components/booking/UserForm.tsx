@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -36,6 +36,7 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 const UserForm = ({ userInfo, onSubmit, onBack }: UserFormProps) => {
+  const [citySearch, setCitySearch] = useState('');
   const {
     control,
     handleSubmit,
@@ -64,6 +65,11 @@ const UserForm = ({ userInfo, onSubmit, onBack }: UserFormProps) => {
     const cleanValue = value.replace(/[^\u06F0-\u06F90-9]/g, '');
     setValue('phone', cleanValue);
   };
+
+  // Filter cities based on search
+  const filteredCities = persianCities.filter(city => 
+    city.toLowerCase().includes(citySearch.toLowerCase())
+  );
 
   return (
     <motion.div
@@ -138,27 +144,33 @@ const UserForm = ({ userInfo, onSubmit, onBack }: UserFormProps) => {
                     <SelectTrigger className="border-2 border-fantasy-pink focus:border-fantasy-gold text-right">
                       <SelectValue placeholder="شهر خود را انتخاب کنید" />
                     </SelectTrigger>
-                    <SelectContent className="max-h-60">
-                      <div className="p-2">
+                    <SelectContent className="max-h-60 bg-white">
+                      <div className="p-2 sticky top-0 bg-white border-b z-50">
                         <Input
                           placeholder="جستجوی شهر..."
-                          className="mb-2 text-right"
-                          onChange={(e) => {
-                            const searchValue = e.target.value.toLowerCase();
-                            const items = document.querySelectorAll('[data-radix-select-item]');
-                            items.forEach((item) => {
-                              const text = item.textContent?.toLowerCase() || '';
-                              const shouldShow = text.includes(searchValue);
-                              (item as HTMLElement).style.display = shouldShow ? 'flex' : 'none';
-                            });
-                          }}
+                          className="mb-2 text-right bg-gray-50 border-fantasy-pink/30 focus:border-fantasy-gold"
+                          dir="rtl"
+                          value={citySearch}
+                          onChange={(e) => setCitySearch(e.target.value)}
                         />
                       </div>
-                      {persianCities.map((city) => (
-                        <SelectItem key={city} value={city} className="text-right" data-radix-select-item>
-                          {city}
-                        </SelectItem>
-                      ))}
+                      <div className="city-list max-h-48 overflow-y-auto">
+                        {filteredCities.length > 0 ? (
+                          filteredCities.map((city) => (
+                            <SelectItem 
+                              key={city} 
+                              value={city} 
+                              className="text-right hover:bg-fantasy-gold/10"
+                            >
+                              {city}
+                            </SelectItem>
+                          ))
+                        ) : (
+                          <div className="p-2 text-center text-gray-500">
+                            شهری یافت نشد
+                          </div>
+                        )}
+                      </div>
                     </SelectContent>
                   </Select>
                 )}
@@ -173,7 +185,7 @@ const UserForm = ({ userInfo, onSubmit, onBack }: UserFormProps) => {
                 type="button"
                 onClick={onBack}
                 variant="outline"
-                className="border-2 border-white bg-white/40 text-white hover:bg-white hover:text-fantasy-black font-bold"
+                className="border-2 border-white bg-white/60 text-white hover:bg-white hover:text-fantasy-black font-bold"
               >
                 بازگشت
               </Button>

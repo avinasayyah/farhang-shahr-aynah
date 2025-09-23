@@ -70,7 +70,7 @@ const DateTimeSelection = ({ selectedDate, selectedTime, onSelect, onBack }: Dat
         <CardContent className="space-y-6">
           <div className="space-y-2">
             <Label className="text-fantasy-black font-bold">تاریخ ملاقات</Label>
-            <div className="border-2 border-fantasy-pink rounded-md p-2 bg-white">
+            <div className="border-2 border-fantasy-pink rounded-lg p-4 bg-gradient-to-br from-white to-fantasy-gold/10 shadow-inner">
               <DatePicker
                 value={date}
                 onChange={setDate}
@@ -78,11 +78,17 @@ const DateTimeSelection = ({ selectedDate, selectedTime, onSelect, onBack }: Dat
                 formatInputText={() => date ? `${date.year}/${date.month}/${date.day}` : 'انتخاب تاریخ'}
                 shouldHighlightWeekends
                 locale="fa"
-                calendarClassName="bg-white shadow-lg"
-                inputClassName="w-full text-center text-fantasy-black border-none outline-none"
+                calendarClassName="bg-white shadow-2xl border border-fantasy-gold rounded-xl overflow-hidden"
+                inputClassName="w-full text-center text-fantasy-black border-none outline-none bg-transparent text-lg font-semibold"
                 wrapperClassName="w-full"
                 colorPrimary="#ec4899"
-                colorPrimaryLight="rgba(236, 72, 153, 0.1)"
+                colorPrimaryLight="rgba(236, 72, 153, 0.15)"
+                renderInput={({ ref, ...rest }) => (
+                  <div className="flex items-center justify-center gap-2 p-3 rounded-lg bg-white/50 border border-fantasy-pink/30">
+                    <CalendarIcon className="h-5 w-5 text-fantasy-pink" />
+                    <input {...rest} ref={ref} className="text-center font-semibold text-fantasy-black bg-transparent border-none outline-none flex-1" />
+                  </div>
+                )}
               />
             </div>
             {errors.date && (
