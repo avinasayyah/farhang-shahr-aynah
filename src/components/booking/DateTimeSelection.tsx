@@ -78,17 +78,27 @@ const DateTimeSelection = ({ selectedDate, selectedTime, onSelect, onBack }: Dat
                 formatInputText={() => date ? `${date.year}/${date.month}/${date.day}` : 'انتخاب تاریخ'}
                 shouldHighlightWeekends
                 locale="fa"
-                calendarClassName="bg-white shadow-2xl border border-fantasy-gold rounded-xl overflow-hidden"
-                inputClassName="w-full text-center text-fantasy-black border-none outline-none bg-transparent text-lg font-semibold"
+                calendarClassName="bg-white shadow-2xl border-2 border-fantasy-gold rounded-xl overflow-hidden !font-vazir"
+                inputClassName="w-full text-center text-fantasy-black border-none outline-none bg-transparent text-lg font-semibold pointer-events-none"
                 wrapperClassName="w-full"
                 colorPrimary="#ec4899"
                 colorPrimaryLight="rgba(236, 72, 153, 0.15)"
                 renderInput={({ ref, ...rest }) => (
-                  <div className="flex items-center justify-center gap-2 p-3 rounded-lg bg-white/50 border border-fantasy-pink/30">
-                    <CalendarIcon className="h-5 w-5 text-fantasy-pink" />
-                    <input {...rest} ref={ref} className="text-center font-semibold text-fantasy-black bg-transparent border-none outline-none flex-1" />
+                  <div className="flex items-center justify-center gap-2 p-4 rounded-lg bg-gradient-to-r from-fantasy-pink/10 to-fantasy-gold/10 border-2 border-fantasy-pink/30 hover:border-fantasy-gold transition-all duration-300 cursor-pointer">
+                    <CalendarIcon className="h-6 w-6 text-fantasy-pink" />
+                    <input 
+                      {...rest} 
+                      ref={ref} 
+                      className="text-center font-bold text-fantasy-black bg-transparent border-none outline-none flex-1 cursor-pointer font-vazir text-lg" 
+                      readOnly
+                    />
                   </div>
                 )}
+                minimumDate={{
+                  year: new Date().getFullYear(),
+                  month: new Date().getMonth() + 1,
+                  day: new Date().getDate() + 1
+                }}
               />
             </div>
             {errors.date && (

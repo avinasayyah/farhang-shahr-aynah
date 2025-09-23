@@ -148,10 +148,13 @@ const UserForm = ({ userInfo, onSubmit, onBack }: UserFormProps) => {
                       <div className="p-2 sticky top-0 bg-white border-b z-50">
                         <Input
                           placeholder="جستجوی شهر..."
-                          className="mb-2 text-right bg-gray-50 border-fantasy-pink/30 focus:border-fantasy-gold"
+                          className="mb-2 text-right bg-gray-50 border-fantasy-pink/30 focus:border-fantasy-gold font-vazir"
                           dir="rtl"
                           value={citySearch}
                           onChange={(e) => setCitySearch(e.target.value)}
+                          onMouseDown={(e) => e.stopPropagation()}
+                          onTouchStart={(e) => e.stopPropagation()}
+                          autoFocus
                         />
                       </div>
                       <div className="city-list max-h-48 overflow-y-auto">
