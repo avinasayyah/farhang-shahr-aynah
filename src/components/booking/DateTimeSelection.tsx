@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { PersianDatePicker } from '@/components/ui/persian-calendar';
+import { PersianDatePicker, formatPersianDate } from '@/components/ui/persian-calendar';
 
 interface DateTimeSelectionProps {
   selectedDate: string | null;
@@ -97,17 +97,8 @@ const DateTimeSelection = ({ selectedDate, selectedTime, onSelect, onBack }: Dat
               animate={{ opacity: 1, y: 0 }}
               className="bg-fantasy-gold/20 p-4 rounded-lg border-2 border-fantasy-gold"
             >
-              <p className="text-fantasy-black font-bold text-center font-inter text-lg">
-                ✨ قرار ملاقات شما: {(() => {
-                  const persian = {
-                    year: date.getFullYear(),
-                    month: date.getMonth() + 1,
-                    day: date.getDate()
-                  };
-                  // Simple Gregorian to Persian approximation for display
-                  const persianYear = persian.year - 621;
-                  return `${persianYear}/${persian.month}/${persian.day}`;
-                })()} ساعت {time} ✨
+              <p className="text-fantasy-black font-bold text-center font-vazir text-lg">
+                ✨ قرار ملاقات شما: {formatPersianDate(date)} ساعت {time} ✨
               </p>
             </motion.div>
           )}

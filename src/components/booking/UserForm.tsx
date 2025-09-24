@@ -66,9 +66,9 @@ const UserForm = ({ userInfo, onSubmit, onBack }: UserFormProps) => {
     setValue('phone', cleanValue);
   };
 
-  // Filter cities based on search
+  // Filter cities based on Persian search only
   const filteredCities = persianCities.filter(city => 
-    city.toLowerCase().includes(citySearch.toLowerCase())
+    city.includes(citySearch)
   );
 
   return (

@@ -4,8 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Copy } from 'lucide-react';
-import { format } from 'date-fns';
-import { faIR } from 'date-fns/locale';
+import { formatPersianDate } from '@/components/ui/persian-calendar';
 import { BookingData } from '../../types/booking';
 import { useToast } from '@/hooks/use-toast';
 import { sendBookingEmail } from '../../utils/email';
@@ -136,7 +135,7 @@ const FinalBooking = ({ bookingData, onBack }: FinalBookingProps) => {
             <div className="space-y-2">
               <p className="text-fantasy-black/70">تاریخ:</p>
               <p className="font-bold text-fantasy-black">
-                {bookingData.date && format(new Date(bookingData.date), "PPP", { locale: faIR })}
+                {bookingData.date && formatPersianDate(new Date(bookingData.date))}
               </p>
             </div>
             
