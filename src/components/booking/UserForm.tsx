@@ -66,10 +66,10 @@ const UserForm = ({ userInfo, onSubmit, onBack }: UserFormProps) => {
     setValue('phone', cleanValue);
   };
 
-  // Filter cities based on Persian search only
-  const filteredCities = persianCities.filter(city => 
-    city.includes(citySearch)
-  );
+  // Filter cities based on Persian search only (normalize ی/ي , ک/ك)
+  const norm = (s: string) => s.replace(/ي/g, 'ی').replace(/ك/g, 'ک');
+  const filteredCities = persianCities.filter((city) => norm(city).includes(norm(citySearch)));
+
 
   return (
     <motion.div
@@ -151,9 +151,13 @@ const UserForm = ({ userInfo, onSubmit, onBack }: UserFormProps) => {
                           className="mb-2 text-right bg-gray-50 border-fantasy-pink/30 focus:border-fantasy-gold font-vazir"
                           dir="rtl"
                           value={citySearch}
-                          onChange={(e) => setCitySearch(e.target.value)}
+                          onChange={(e) => {
+                            const val = e.target.value.replace(/[A-Za-z0-9]/g, '');
+                            setCitySearch(val);
+                          }}
                           onMouseDown={(e) => e.stopPropagation()}
                           onTouchStart={(e) => e.stopPropagation()}
+                          onKeyDown={(e) => e.stopPropagation()}
                           autoFocus
                         />
                       </div>
