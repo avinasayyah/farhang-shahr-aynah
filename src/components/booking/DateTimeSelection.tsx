@@ -38,9 +38,8 @@ const DateTimeSelection = ({ selectedDate, selectedTime, onSelect, onBack }: Dat
     }
   };
 
-  // Generate tomorrow as minimum date
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
+  // Use today as minimum date (allow today and tomorrow)
+  const today = new Date();
 
   return (
     <motion.div
@@ -70,7 +69,7 @@ const DateTimeSelection = ({ selectedDate, selectedTime, onSelect, onBack }: Dat
               value={date}
               onChange={setDate}
               placeholder="انتخاب تاریخ"
-              minDate={tomorrow}
+              minDate={today}
             />
             {errors.date && (
               <p className="text-destructive text-sm">{errors.date}</p>
